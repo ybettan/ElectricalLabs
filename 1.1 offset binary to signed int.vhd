@@ -6,7 +6,7 @@ use ieee.std_logic_arith.all
 entity offset_to_int is 
 port (
     din        	:   in std_logic_vector (7 downto 0);
-    dout     	:   out std_logic_vector (3 downto 0);
+    dout     	:   out std_logic_vector (7 downto 0);
 );
 end offset_to_int;
 
