@@ -1,0 +1,96 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 4.167 ns
+From           : KBD_DAT
+To             : KBD:inst|bitrec:inst|present_state.idle
+From Clock     : --
+To Clock       : CLK
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 13.254 ns
+From           : VGA_Controller:inst13|V_Cont[8]
+To             : VGA_G[7]
+From Clock     : CLOCK_27
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -3.392 ns
+From           : KBD_CLK
+To             : KBD:inst|lpf:cleaner|shiftreg[0]
+From Clock     : --
+To Clock       : CLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'misc:inst17|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0'
+Slack          : 29.455 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : 131.89 MHz ( period = 7.582 ns )
+From           : Ball_Draw:inst21|Ball_Move:inst|O_objectStartX[0]
+To             : Ball_Draw:inst21|Ball_Object:inst1|mVGA_RGB[7]
+From Clock     : misc:inst17|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+To Clock       : misc:inst17|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+Failed Paths   : 0
+
+Type           : Clock Setup: 'CLOCK_27'
+Slack          : 32.933 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : 243.66 MHz ( period = 4.104 ns )
+From           : misc:inst17|Reset_Delay:r0|Cont[2]
+To             : misc:inst17|Reset_Delay:r0|Cont[3]
+From Clock     : CLOCK_27
+To Clock       : CLOCK_27
+Failed Paths   : 0
+
+Type           : Clock Setup: 'CLK'
+Slack          : N/A
+Required Time  : None
+Actual Time    : 195.39 MHz ( period = 5.118 ns )
+From           : KBD:inst|byterec:inst3|dout[0]
+To             : Player:inst6|current_racket_center[9]
+From Clock     : CLK
+To Clock       : CLK
+Failed Paths   : 0
+
+Type           : Clock Hold: 'misc:inst17|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0'
+Slack          : 0.391 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : N/A
+From           : VGA_Controller:inst13|oVGA_V_SYNC_t
+To             : VGA_Controller:inst13|oVGA_V_SYNC_t
+From Clock     : misc:inst17|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+To Clock       : misc:inst17|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+Failed Paths   : 0
+
+Type           : Clock Hold: 'CLOCK_27'
+Slack          : 0.391 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : N/A
+From           : misc:inst17|Reset_Delay:r0|Cont[0]
+To             : misc:inst17|Reset_Delay:r0|Cont[0]
+From Clock     : CLOCK_27
+To Clock       : CLOCK_27
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

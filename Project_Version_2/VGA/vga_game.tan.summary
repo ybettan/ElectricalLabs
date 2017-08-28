@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 14.123 ns
+From           : VGA_Controller:inst6|V_Cont[1]
+To             : VGA_R[7]
+From Clock     : CLOCK_27
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Clock Setup: 'misc:inst|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0'
+Slack          : 30.189 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : 146.03 MHz ( period = 6.848 ns )
+From           : VGA_Controller:inst6|oVGA_V_SYNC_t
+To             : timer:inst1|VGA_VS_pulse_cnt[16]
+From Clock     : misc:inst|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+To Clock       : misc:inst|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+Failed Paths   : 0
+
+Type           : Clock Setup: 'CLOCK_27'
+Slack          : 33.087 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : 253.16 MHz ( period = 3.950 ns )
+From           : misc:inst|Reset_Delay:r0|Cont[1]
+To             : misc:inst|Reset_Delay:r0|Cont[11]
+From Clock     : CLOCK_27
+To Clock       : CLOCK_27
+Failed Paths   : 0
+
+Type           : Clock Hold: 'misc:inst|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0'
+Slack          : 0.391 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : N/A
+From           : smileyfacemove:inst3|ObjectStartY[8]
+To             : smileyfacemove:inst3|ObjectStartY[8]
+From Clock     : misc:inst|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+To Clock       : misc:inst|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+Failed Paths   : 0
+
+Type           : Clock Hold: 'CLOCK_27'
+Slack          : 0.391 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : N/A
+From           : misc:inst|Reset_Delay:r0|Cont[0]
+To             : misc:inst|Reset_Delay:r0|Cont[0]
+From Clock     : CLOCK_27
+To Clock       : CLOCK_27
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

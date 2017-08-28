@@ -1,0 +1,10 @@
+first day commit:
+
+    - "siftah" is working (keyboard + player + player_draw)
+    - ball_draw is working
+    - briks_draw is written but still not working
+
+
+
+todo:
+

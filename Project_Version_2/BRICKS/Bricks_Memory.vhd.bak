@@ -1,0 +1,40 @@
+library ieee ;
+use ieee.std_logic_1164.all ;
+
+entity Bricks_Memory is 
+port ( 
+	resetN 		: in std_logic ; 
+	clk 		: in std_logic ; 
+	random_num	: in std_logic_vector (7 downto 0) ; 
+	brick_row_x	: in std_logic_vector (99 downto 0) ; --size probably is not true, need to check
+	brick_row_y	: in std_logic_vector (99 downto 0) ; --size probably is not true, need to check
+	LVL_DIFF	: in std_logic_vector (1 downto 0) ; 
+	--next 2 lines should be identical in Brick_Breaker_Contoller and Ball_Logic
+	ball_x		: in std_logic_vector (99 downto 0) ; --size probably is not true, need to check
+	ball_y		: in std_logic_vector (99 downto 0) ; --size probably is not true, need to check
+	line_number	: out std_logic_vector (2 downto 0) ;--which line is in question. There are 5 lines
+	hit_kind	: out std_logic_vector (2 downto 0) ;--4 possible brick edges, 3 possible walls, 1 racket
+	hit_indicator: out std_logic ;--was there a collision
+	row_colour	: out std_logic_vector (7 downto 0) ; 
+	row_hits	: out std_logic_vector (3 downto 0) );--how many times should the bricks be hit
+end Bricks_Memory; 
+
+architecture arc_Bricks_Memory of Bricks_Memory is 
+	--next 3 lines should be identical in Brick_Breaker_Contoller and Bricks_Memory
+	constant LVL_NOVICE : std_logic_vector (1 downto 0) := "00";
+	constant LVL_MEDIUM : std_logic_vector (1 downto 0) := "01";
+	constant LVL_DIFFICULT : std_logic_vector (1 downto 0) := "10";
+begin 
+	process ( resetN , clk) 
+	begin 
+		if resetN = '0' then 
+			line_number <= "000";
+			hit_kind <= "000";
+			row_colour <= "00000000";
+			row_hits <= "0000";
+			hit_indicator <= '0';
+		elsif rising_edge(clk) then 
+			
+		end if; 
+	end process; 
+end architecture;
