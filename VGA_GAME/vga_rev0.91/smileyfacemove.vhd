@@ -5,14 +5,22 @@ use ieee.numeric_std.all;
 -- Alex Grinshpun March 24 2017 
 
 entity smileyfacemove is
-port 	(
+--port 	(
 		--////////////////////	Clock Input	 	////////////////////	 
-		CLK				: in std_logic; --						//	27 MHz
-		RESETn			: in std_logic; --			//	50 MHz
+--		CLK				: in std_logic; --						//	27 MHz
+--		RESETn			: in std_logic; --			//	50 MHz
+--		timer_done		: in std_logic;
+--		ObjectStartX	: out integer ;
+--		ObjectStartY	: out integer
+--		
+--	);
+port 	(
+		CLK				: in std_logic;
 		timer_done		: in std_logic;
-		ObjectStartX	: out integer ;
-		ObjectStartY	: out integer
-		
+		IbjectStartX	: in integer range 0 to 680; -- actually 640
+		IbjectStartY	: in integer range 0 to 512; -- actually 480
+		ObjectStartX	: out integer range 0 to 680; -- actually 640
+		ObjectStartY	: out integer range 0 to 512; -- actually 480
 	);
 end smileyfacemove;
 
@@ -20,32 +28,44 @@ architecture behav of smileyfacemove is
 
 
 
-signal ObjectStartX_t : integer range 0 to 680;
-signal ObjectStartY_t : integer range 0 to 512;
+--signal ObjectStartX_t : integer range 0 to 680; --640
+--signal ObjectStartY_t : integer range 0 to 512; --480
 begin
 
 
 
 
 
+--		process ( RESETn,CLK)
+--		begin
+--		  if RESETn = '0' then
+--				ObjectStartX_t	<= 580;
+--				ObjectStartY_t	<= 385 ;
+--		elsif CLK'event  and CLK = '1' then
+--			if timer_done = '1' then
+--				if ObjectStartX_t <= 100 then
+--					ObjectStartX_t <= 580;
+--					ObjectStartY_t <= 385;
+--				else
+--					ObjectStartX_t  <= ObjectStartY_t*ObjectStartY_t/256;
+--					ObjectStartY_t  <= ObjectStartY_t - 1;
+--				end if;
+--			end if;
+--			
+--		end if;
+--		end process ;
+
 		process ( RESETn,CLK)
 		begin
-		  if RESETn = '0' then
-				ObjectStartX_t	<= 580;
-				ObjectStartY_t	<= 385 ;
-		elsif CLK'event  and CLK = '1' then
-			if timer_done = '1' then
-				if ObjectStartX_t <= 100 then
-					ObjectStartX_t <= 580;
-					ObjectStartY_t <= 385;
-				else
-					ObjectStartX_t  <= ObjectStartY_t*ObjectStartY_t/256;
-					ObjectStartY_t  <= ObjectStartY_t - 1;
-				end if;
+		if CLK'event  and CLK = '1' then
+	    	if timer_done = '1' then
+                ObjectStartX <= IbjectStartX;
+                ObjectStartY <= IbjectStartY;
 			end if;
-			
 		end if;
 		end process ;
+
+
 ObjectStartX	<= ObjectStartX_t;			
 ObjectStartY	<= ObjectStartY_t;	
 
