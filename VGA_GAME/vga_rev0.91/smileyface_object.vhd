@@ -6,18 +6,6 @@ use IEEE.STD_LOGIC_1164.all;
 -- Alex Grinshpun April 2017
 
 entity smaleyface_object is
---port 	(
---	   	CLK  		: in std_logic;
---		RESETn		: in std_logic;
---		oCoord_X	: in integer;
---		oCoord_Y	: in integer;
---		ObjectStartX	: in integer;
---		ObjectStartY 	: in integer;
---		drawing_request	: out std_logic ;
---		mVGA_RGB 	: out std_logic_vector(7 downto 0) ;
---		keepflag    : out std_logic
---	);
---end smaleyface_object;
 port 	(
 	   	CLK  	    	: in std_logic;
 		RESETn	    	: in std_logic;
@@ -25,7 +13,6 @@ port 	(
 		oCoord_Y    	: in integer;
 		ObjectStartX	: in integer;
 		ObjectStartY 	: in integer;
-	--	Size         	: in std_logic_vector (3 downto p);
 		drawing_request	: out std_logic ;
 		mVGA_RGB    	: out std_logic_vector(7 downto 0) ;
 		keepflag        : out std_logic
@@ -34,8 +21,6 @@ end smaleyface_object;
 
 architecture behav of smaleyface_object is 
 
---constant object_X_size : integer := 26;
---constant object_Y_size : integer := 26;
 constant object_X_size : integer := 26;
 constant object_Y_size : integer := 10;
 constant R_high		: integer := 7;
@@ -59,45 +44,10 @@ constant object_colors: ram_array := (
 (x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF"),
 (x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF"),
 (x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF")
-
---(x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF"),
---(x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"D5", x"D0", x"D0", x"D4", x"D4", x"D4", x"D4", x"D0", x"D0", x"D5", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF"),
---(x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"D5", x"D0", x"D4", x"64", x"8C", x"FF", x"FF", x"FF", x"FF", x"FF", x"64", x"AC", x"D0", x"D5", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"FF", x"FF", x"D0", x"D4", x"D9", x"8C", x"D9", x"FF", x"D9", x"D9", x"D9", x"D9", x"D9", x"FF", x"D5", x"D5", x"D4", x"D0", x"FF", x"FF", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"FF", x"D0", x"D4", x"D9", x"D9", x"FF", x"D9", x"D9", x"D9", x"D9", x"D9", x"D9", x"D9", x"D9", x"D9", x"D9", x"D9", x"D9", x"D0", x"FF", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"D0", x"D4", x"D9", x"D9", x"D5", x"D4", x"88", x"6C", x"D4", x"D9", x"D9", x"D9", x"D9", x"B0", x"D5", x"D9", x"D9", x"D9", x"D9", x"CC", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"D0", x"D4", x"D9", x"D5", x"D4", x"40", x"04", x"9B", x"9B", x"96", x"D4", x"D9", x"D9", x"B1", x"9B", x"72", x"24", x"8C", x"D9", x"D9", x"D4", x"D0", x"FF", x"FF"), 
---(x"FF", x"B6", x"D0", x"D9", x"D5", x"D9", x"40", x"29", x"FF", x"FF", x"FF", x"FF", x"92", x"D9", x"D4", x"FF", x"FF", x"FF", x"FF", x"24", x"8C", x"D5", x"D9", x"D0", x"D5", x"FF"), 
---(x"FF", x"D0", x"D4", x"D9", x"B0", x"44", x"44", x"FF", x"96", x"0A", x"92", x"FF", x"FF", x"D0", x"B6", x"FF", x"4E", x"0A", x"FF", x"FF", x"44", x"B4", x"D8", x"D4", x"D0", x"FF"), 
---(x"FF", x"D0", x"D4", x"D8", x"D8", x"D0", x"71", x"BA", x"FF", x"00", x"32", x"FF", x"FF", x"D4", x"BA", x"FF", x"68", x"2D", x"72", x"FF", x"D0", x"D8", x"D4", x"D4", x"D0", x"FF"), 
---(x"D5", x"D0", x"D4", x"D4", x"D4", x"D0", x"B6", x"76", x"00", x"00", x"56", x"FF", x"FF", x"D4", x"BA", x"56", x"00", x"72", x"52", x"FF", x"D0", x"D4", x"D4", x"D4", x"D0", x"D5"), 
---(x"D5", x"D0", x"D4", x"D4", x"D4", x"D4", x"B6", x"9B", x"32", x"52", x"52", x"FF", x"FF", x"D4", x"D5", x"76", x"2D", x"76", x"96", x"FF", x"D0", x"D4", x"D4", x"D4", x"D0", x"D5"), 
---(x"D4", x"D0", x"D4", x"D4", x"D4", x"D4", x"D0", x"D9", x"72", x"4E", x"FF", x"FF", x"92", x"D9", x"D8", x"9B", x"72", x"72", x"FF", x"B0", x"D4", x"D4", x"D4", x"D4", x"D0", x"D4"), 
---(x"D4", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D0", x"BA", x"9B", x"76", x"D4", x"D9", x"D9", x"D4", x"B6", x"B6", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D5"), 
---(x"D5", x"D0", x"D4", x"D4", x"D4", x"D0", x"D0", x"D0", x"D0", x"D4", x"D4", x"D4", x"D9", x"D9", x"D8", x"D8", x"D8", x"D0", x"D0", x"D0", x"D0", x"D4", x"D4", x"D4", x"D0", x"D5"), 
---(x"D5", x"D0", x"D4", x"D4", x"D4", x"D4", x"D0", x"D0", x"D0", x"D8", x"D8", x"D8", x"D8", x"D8", x"D8", x"D8", x"D8", x"D8", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D5"), 
---(x"FF", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D8", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"FF"), 
---(x"FF", x"D0", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D8", x"D4", x"D0", x"D0", x"D0", x"D0", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"FF"), 
---(x"FF", x"D5", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D8", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D5", x"FF"), 
---(x"FF", x"FF", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D0", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"D0", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"FF", x"D0", x"D8", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"FF", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"FF", x"FF", x"D0", x"D9", x"D9", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D0", x"FF", x"FF", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"D5", x"D4", x"D9", x"D9", x"D9", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D0", x"D5", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"D5", x"D4", x"D4", x"D4", x"D4", x"D4", x"D4", x"D0", x"D0", x"D5", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF"), 
---(x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"FF")
 );
 
 type object_form is array (0 to object_Y_size - 1 , 0 to object_X_size - 1) of std_logic;
 constant object : object_form := (
---("00000000000000000000000000"),
---("00000011111111111111000000"),
---("00000111111111111111110000"),
---("00001111111111111111110000"),
---("00011111111111111111111000"),
---("00111111111111111111111100"),
---("00111111111111111111111111"),
---("01111111111111111111111111"),
 ("11111111111111111111111111"),
 ("11111111111111111111111111"),
 ("11111111111111111111111111"),
@@ -108,6 +58,14 @@ constant object : object_form := (
 ("11111111111111111111111111"),
 ("11111111111111111111111111"),
 ("11111111111111111111111111")
+--("00000000000000000000000000"), -- this is in case we wand a different form
+--("00000011111111111111000000"),
+--("00000111111111111111110000"),
+--("00001111111111111111110000"),
+--("00011111111111111111111000"),
+--("00111111111111111111111100"),
+--("00111111111111111111111111"),
+--("01111111111111111111111111"),
 );
 
 
