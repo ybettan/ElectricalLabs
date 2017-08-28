@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 14.524 ns
+From           : smileyfacemove:smileyFaceMove_u|ObjectStartX_t[5]
+To             : keepflag
+From Clock     : CLOCK_27
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Clock Setup: 'misc:misc_u|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0'
+Slack          : 24.710 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : 81.12 MHz ( period = 12.327 ns )
+From           : smileyfacemove:smileyFaceMove_u|ObjectStartY_t[6]
+To             : smaleyface_object:smileyface_object_u|mVGA_RGB[2]
+From Clock     : misc:misc_u|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+To Clock       : misc:misc_u|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+Failed Paths   : 0
+
+Type           : Clock Setup: 'CLOCK_27'
+Slack          : 33.023 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : 249.13 MHz ( period = 4.014 ns )
+From           : misc:misc_u|Reset_Delay:r0|Cont[14]
+To             : misc:misc_u|Reset_Delay:r0|Cont[15]
+From Clock     : CLOCK_27
+To Clock       : CLOCK_27
+Failed Paths   : 0
+
+Type           : Clock Hold: 'misc:misc_u|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0'
+Slack          : 0.391 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : N/A
+From           : smileyfacemove:smileyFaceMove_u|ObjectStartY_t[0]
+To             : smileyfacemove:smileyFaceMove_u|ObjectStartY_t[0]
+From Clock     : misc:misc_u|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+To Clock       : misc:misc_u|VGA_Audio_PLL:p1|altpll:altpll_component|_clk0
+Failed Paths   : 0
+
+Type           : Clock Hold: 'CLOCK_27'
+Slack          : 0.391 ns
+Required Time  : 27.00 MHz ( period = 37.037 ns )
+Actual Time    : N/A
+From           : misc:misc_u|Reset_Delay:r0|Cont[0]
+To             : misc:misc_u|Reset_Delay:r0|Cont[0]
+From Clock     : CLOCK_27
+To Clock       : CLOCK_27
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+
