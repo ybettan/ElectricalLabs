@@ -1,0 +1,77 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.std_logic_unsigned.all;
+use ieee.numeric_std.all;
+-- Alex Grinshpun March 24 2017 
+
+entity smileyfacemove is
+port 	(
+		--////////////////////	Clock Input	 	////////////////////	 
+		CLK				: in std_logic; --						//	27 MHz
+		RESETn			: in std_logic; --			//	50 MHz
+		timer_done		: in std_logic;
+		
+		dout			: in std_logic_vector(8 downto 0); -- 		keyBoard output - passed from kbd_sof.vhd
+		make			: in std_logic; 				   --       acynch when key pressed
+		
+		ObjectStartX	: out integer ;
+		ObjectStartY	: out integer
+		
+	);
+end smileyfacemove;
+
+architecture behav of smileyfacemove is 
+
+signal din : std_logic_vector (7 downto 0) ;
+
+signal ObjectStartX_t : integer range 0 to 680;
+signal ObjectStartY_t : integer range 0 to 512;
+
+shared variable mid_air : integer range 0 to 6;
+
+
+begin
+
+
+
+	
+		
+		process ( RESETn,CLK)
+		
+		
+		
+		begin
+		din <= dout(7 downto 0);
+		
+		  if RESETn = '0' then
+				ObjectStartX_t	<= 340;
+				ObjectStartY_t	<= 512-40;
+		elsif CLK'event  and CLK = '1' then
+		
+				if mid_air = 6 then
+					mid_air := 0;
+					ObjectStartY_t  <= ObjectStartY_t +40;
+				elsif mid_air > 0 then 
+					if mid_air < 4 then
+						mid_air := mid_air+1;
+						ObjectStartY_t  <= ObjectStartY_t - 40;
+					else 
+						mid_air := mid_air+1;
+						ObjectStartY_t  <= ObjectStartY_t +40;
+					end if; 
+				elsif din = "01110101" then 
+					mid_air := mid_air +1;
+					ObjectStartY_t  <= ObjectStartY_t - 40;
+				else 
+					ObjectStartX_t	<= 340;
+					ObjectStartY_t	<= 512-40;
+				end if;
+			end if;
+			
+		end process ;
+ObjectStartX	<= ObjectStartX_t;			
+ObjectStartY	<= ObjectStartY_t;	
+
+--ObjectStartX	<= 100;			
+--ObjectStartY	<= 100;		
+end behav;
