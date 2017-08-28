@@ -9,10 +9,10 @@ entity smaleyface_object is
 port 	(
 	   	CLK  	    	: in std_logic;
 		RESETn	    	: in std_logic;
-		oCoord_X    	: in integer;
-		oCoord_Y    	: in integer;
-		ObjectStartX	: in integer;
-		ObjectStartY 	: in integer;
+		oCoord_X    	: in integer range 0 to 680 ; --actually 640
+		oCoord_Y    	: in integer range 0 to 512; --actually 480
+		ObjectStartX	: in integer range 0 to 680 ; --actually 640
+		ObjectStartY 	: in integer range 0 to 512; --actually 480
 		drawing_request	: out std_logic ;
 		mVGA_RGB    	: out std_logic_vector(7 downto 0) ;
 		keepflag        : out std_logic

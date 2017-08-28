@@ -20,7 +20,7 @@ port 	(
 		IbjectStartX	: in integer range 0 to 680; -- actually 640
 		IbjectStartY	: in integer range 0 to 512; -- actually 480
 		ObjectStartX	: out integer range 0 to 680; -- actually 640
-		ObjectStartY	: out integer range 0 to 512; -- actually 480
+		ObjectStartY	: out integer range 0 to 512 -- actually 480
 	);
 end smileyfacemove;
 
@@ -55,7 +55,7 @@ begin
 --		end if;
 --		end process ;
 
-		process ( RESETn,CLK)
+		process (CLK)
 		begin
 		if CLK'event  and CLK = '1' then
 	    	if timer_done = '1' then
@@ -66,8 +66,8 @@ begin
 		end process ;
 
 
-ObjectStartX	<= ObjectStartX_t;			
-ObjectStartY	<= ObjectStartY_t;	
+--ObjectStartX	<= ObjectStartX_t;			
+--ObjectStartY	<= ObjectStartY_t;	
 
 --ObjectStartX	<= 100;			
 --ObjectStartY	<= 100;		
