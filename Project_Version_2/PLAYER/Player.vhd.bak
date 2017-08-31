@@ -1,0 +1,60 @@
+library ieee ;
+use ieee.std_logic_1164.all ;
+use IEEE.NUMERIC_STD.all;
+
+entity Player is 
+port ( 
+	RESETn 			: in std_logic ; 
+	clk 			: in std_logic ; 
+	din				: in std_logic_vector (8 downto 0) ;--note from keyboard
+	make 			: in std_logic ; 
+	break 			: in std_logic ; 
+	racket_center	: out std_logic_vector (9 downto 0) ;
+	racket_Y		: out integer ;
+	racket_size		: out std_logic_vector (2 downto 0) ); --size of racket can change
+end Player; 
+
+architecture arc_Player of Player is 
+	constant mid_screen 			: integer := 320;--320, mid screen
+	constant default_racket_size 	: integer := 5;--5, default size
+	constant default_rackt_Y 		: integer := 440;
+	signal current_racket_center 	: integer range 0 to 639 := 320;
+	signal current_racket_size 		: integer range 0 to 7 := 5;
+	signal pressed					: std_logic := '0'; 
+begin 
+	racket_center <= std_logic_vector(to_signed(current_racket_center, racket_center'length));
+	racket_Y <= default_rackt_Y;--never changes
+	racket_size <= std_logic_vector(to_unsigned(current_racket_size, racket_size'length));
+	
+	process ( RESETn , clk) 
+	begin 
+		if (RESETn = '0') then 
+			current_racket_center <= mid_screen;
+			current_racket_size <= default_racket_size;
+			pressed <= '0'; 
+		elsif rising_edge(clk) then 
+			if (make = '1') then
+				--pressed <= '1';
+				if (din = "000101101") then--R press, 2D
+					current_racket_center <= mid_screen;
+				elsif (din = "101101011") then--left arrow, 16B
+					current_racket_center <= (current_racket_center - 1);
+				elsif (din = "101110100") then--right arrow, 174
+					current_racket_center <= (current_racket_center + 1);
+				end if;
+			end if;
+--			if ((make = '1') and (pressed ='0')) then
+--				pressed <= '1';
+--				if (din = "000101101") then--R press, 2D
+--					current_racket_center <= mid_screen;
+--				elsif (din = "101101011") then--left arrow, 16B
+--					current_racket_center <= (current_racket_center - 1);
+--				elsif (din = "101110100") then--right arrow, 174
+--					current_racket_center <= (current_racket_center + 1);
+--				end if;
+--			elsif (break = '1') then 
+--				pressed <= '0';
+--			end if;
+		end if; 
+	end process; 
+end architecture;
