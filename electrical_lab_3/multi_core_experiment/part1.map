@@ -1,0 +1,7 @@
+regular task init ()
+duplicable task evaluate (init/u)
+regular task cond(evaluate | body)
+duplicable task body (cond/1)
+regular task finish (cond/0)
+
+
