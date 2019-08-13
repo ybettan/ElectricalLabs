@@ -1,0 +1,7 @@
+1. Because it's bandwidth-efficient and uses little battery power
+2. A callback function is a function given to another module to be activated
+    by this module when needed, for example an handler function to be executed
+    when an interrupt occurs in OSs.
+    
+    It is important in IoT applications because it enables a generic handler
+    for notification when the user supply the handler itself.
